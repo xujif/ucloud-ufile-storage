@@ -168,7 +168,7 @@ class UcloudUfileAdapter extends AbstractAdapter {
 	 */
 	public function getMetadata($path) {
 		$path = $this->applyPathPrefix($path);
-		$this->ufileSdk->meta($path);
+		return $this->ufileSdk->meta($path);
 	}
 
 	/**
