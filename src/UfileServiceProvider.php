@@ -4,7 +4,7 @@ namespace Xujif\UcloudUfileStorage;
 use Illuminate\Support\ServiceProvider;
 use League\Flysystem\Filesystem;
 
-class UfileFileSystemServiceProvider extends ServiceProvider {
+class UfileServiceProvider extends ServiceProvider {
 
 	public function boot() {
 		\Storage::extend(
