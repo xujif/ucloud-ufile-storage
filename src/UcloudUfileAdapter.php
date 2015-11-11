@@ -13,8 +13,11 @@ class UcloudUfileAdapter extends AbstractAdapter {
 	protected $ufileSdk;
 
 
-	public function __construct($bucket, $public_key, $secret_key, $suffix = '.ufile.ucloud.cn', $https = false,) {
+
+
+	public function __construct($bucket, $public_key, $secret_key, $suffix = '.ufile.ucloud.cn',$pathPrefix='', $https = false) {
 		$this->ufileSdk = new UfileSdk($bucket,$public_key,$secret_key,$suffix,$https);
+		$this->setPathPrefix($pathPrefix);
 	}
 
 	/**
@@ -27,6 +30,7 @@ class UcloudUfileAdapter extends AbstractAdapter {
 	 * @return array|false false on failure file meta data on success
 	 */
 	public function write($path, $contents, Config $config) {
+		$path = $this->applyPathPrefix($path);
 		$params = $config->get('params', null);
 		$mime = $config->get('mime', 'application/octet-stream');
 		$checkCrc = $config->get('checkCrc', false);
@@ -43,6 +47,7 @@ class UcloudUfileAdapter extends AbstractAdapter {
 	 * @return array|false false on failure file meta data on success
 	 */
 	public function writeStream($path, $resource, Config $config) {
+		$path = $this->applyPathPrefix($path);
 		$params = $config->get('params', null);
 		$mime = $config->get('mime', 'application/octet-stream');
 		$checkCrc = $config->get('checkCrc', false);
@@ -107,6 +112,7 @@ class UcloudUfileAdapter extends AbstractAdapter {
 	 * @return bool
 	 */
 	public function delete($path) {
+		$path = $this->applyPathPrefix($path);
 		return $this->ufileSdk->delete($path);
 	}
 
