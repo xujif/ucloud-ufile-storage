@@ -15,7 +15,7 @@ class UfileServiceProvider extends ServiceProvider {
 					$config['public_key'],
 					$config['secret_key'],
 					$config['suffix'],
-					$config['prefix'],
+					$config['prefix']
 				);
 				$fs = new Filesystem($ufileAdapter);
 				return $fs;
