@@ -60,6 +60,7 @@ class UcloudUfileAdapter extends AbstractAdapter {
 		$mime = $config->get('mime', 'application/octet-stream');
 		$checkCrc = $config->get('checkCrc', false);
 		list($ret, $code) = $this->ufileSdk->put($path, $resource, ['Content-Type' => $mime]);
+		return $ret;
 	}
 
 	/**
